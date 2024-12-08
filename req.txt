@@ -1,0 +1,8 @@
+npm create vite@latest .
+
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+
+npx shadcn@latest init
+npx shadcn@latest add button
+npm run dev
