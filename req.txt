@@ -6,3 +6,25 @@ npx tailwindcss init -p
 npx shadcn@latest init
 npx shadcn@latest add button
 npm run dev
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+npm i @reduxjs/toolkit
+npm i react-redux      
