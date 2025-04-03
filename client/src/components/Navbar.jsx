@@ -29,6 +29,7 @@ import { DropdownMenuGroup } from '@radix-ui/react-dropdown-menu';
 import { Button } from './ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
 import DarkMode from '@/DarkMode';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const user = true;
@@ -56,12 +57,18 @@ const Navbar = () => {
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuGroup>
+                  <DropdownMenuItem>
+                      <Link to="my-learning">
+                        My learning
+                      </Link>
+                    </DropdownMenuItem>
                     <DropdownMenuItem>
+                      <Link to='profile'>
                       Edit Profile
+
+                      </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem>
-                      My learning
-                    </DropdownMenuItem>
+                    
                   </DropdownMenuGroup>
                   <DropdownMenuSeparator />
 
