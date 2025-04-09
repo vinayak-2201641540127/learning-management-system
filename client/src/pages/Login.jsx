@@ -76,21 +76,21 @@ const Login = () => {
             toast.success(registerData.message || "signup success")
         }
         if(registerError){
-            toast.error("Signup Failed"||registerData.data.message)
+            toast.error(registerError.data.message || "Signup Failed")
         }
         if(loginIsSuccess || loginData){
             toast.success(loginData.message || "Login Successful");
             navigate("/");
         }
         if(loginError){
-            toast.error("Login Failed" || loginData.data.message)
+            toast.error(loginError.data.message || "Login Failed")
         }
     }, [loginData, registerData, loginError, loginIsLoading, registerIsLoading]);
 
 
     return (
         <div className="flex items-center w-full justify-center mt-20">
-            <Tabs defaultValue="signup" className="w-[400px]">
+            <Tabs defaultValue="login" className="w-[400px]">
                 <TabsList className="grid w-full grid-cols-2">
                     <TabsTrigger value="signup">Signup</TabsTrigger>
                     <TabsTrigger value="login">Login</TabsTrigger>

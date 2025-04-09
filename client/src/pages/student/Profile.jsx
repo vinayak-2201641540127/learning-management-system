@@ -12,7 +12,7 @@ import { toast } from 'sonner';
 const Profile = () => {
     const [name, setName] = useState("");
     const [profilePhoto, setProfilePhoto] = useState("");
-    const {data, isLoading} = useLoadUserQuery()
+    const {data, isLoading, refetch} = useLoadUserQuery()
     const [updateUser, {data:updateUserData, isLoading: updateUserIsLoading, isError, error, isSuccess}] = useUpdateUserMutation();
     // console.log(data)
 
@@ -31,22 +31,23 @@ const Profile = () => {
         await updateUser(formData);
     };
 
+    useEffect(()=>{
+        refetch();
+    }, [])
+
     useEffect(() => {
         if (isSuccess) {
+            refetch();
             toast.success(data?.message || "Profile updated"); // ✅ Use `data?.message` first
         }
         if (isError) {
             toast.error(error?.message || "Failed to Update the profile"); // ✅ Use `error?.message` first
         }
-    }, [error, data, isSuccess, isError]);
+    }, [error, updateUserData, isSuccess, isError]);
 
     if(isLoading)return <h1>Profile Loading..</h1>
     
     const user = data && data.user;
-   
-    
-    
-
 
     return (
         <div className='max-w-4xl mx-auto px-4 my-24'>
@@ -54,7 +55,7 @@ const Profile = () => {
             <div className='flex flex-col md:flex-row items-center md:items-start gap-8 my-5'>
                 <div className='flex flex-col items-center'>
                     <Avatar className="w-24 h-24 md:h-32 md:w-32 mb-4">
-                        <AvatarImage src={user.photoUrl || "https://github.com/shadcn.png"} />
+                        <AvatarImage src={user?.photoUrl || "https://github.com/shadcn.png"} />
                         <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
                 </div>
@@ -116,9 +117,9 @@ const Profile = () => {
                                 </div>
                             </div>
                             <DialogFooter>
-                                <Button disabled={isLoading} onClick={updateUserHandler}>
+                                <Button disabled={updateUserIsLoading} onClick={updateUserHandler}>
                                     {
-                                        isLoading ? (
+                                        updateUserIsLoading ? (
                                             <>
                                                 <Loader2 className='mr-2 h-4 w-4 animate-spin' />Wait
                                             </>
