@@ -20,7 +20,7 @@ app.use(cors({
 }));
 
 app.use('/api/v1/user', userRoute);
-// app.use('/api/v1/course', courseRoute);
+app.use('/api/v1/course', courseRoute);
 
 
 app.listen(PORT, ()=>{
